@@ -14,7 +14,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "boardgamesPicker",
+            "prefix": "bgp",
             "style": "camelCase"
           }
         ],
@@ -22,7 +22,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "boardgames-picker",
+            "prefix": "bgp",
             "style": "kebab-case"
           }
         ]

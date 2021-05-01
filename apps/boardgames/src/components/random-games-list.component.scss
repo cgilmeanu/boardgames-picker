@@ -1,0 +1,14 @@
+.pg-random-games {
+  max-width: 100vw;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  &__content {
+    // border: 1px lightsalmon solid;
+  }
+
+  &__box {
+    width: 250px;
+    height: 250px;
+  }
+}
