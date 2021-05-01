@@ -41,7 +41,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/boardgames",
+            "outputPath": "dist",
             "index": "apps/boardgames/src/index.html",
             "main": "apps/boardgames/src/main.ts",
             "polyfills": "apps/boardgames/src/polyfills.ts",
