@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "boardgames",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "boardgames": {
+      "projectType": "application",
+      "root": "apps/boardgames",
+      "sourceRoot": "apps/boardgames/src",
+      "prefix": "boardgames-picker",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/boardgames",
+            "index": "apps/boardgames/src/index.html",
+            "main": "apps/boardgames/src/main.ts",
+            "polyfills": "apps/boardgames/src/polyfills.ts",
+            "tsConfig": "apps/boardgames/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/boardgames/src/favicon.ico",
+              "apps/boardgames/src/assets"
+            ],
+            "styles": ["apps/boardgames/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/boardgames/src/environments/environment.ts",
+                  "with": "apps/boardgames/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "boardgames:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "boardgames:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "boardgames:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/boardgames/src/**/*.ts",
+              "apps/boardgames/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/boardgames"],
+          "options": {
+            "jestConfig": "apps/boardgames/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "boardgames-e2e": {
+      "root": "apps/boardgames-e2e",
+      "sourceRoot": "apps/boardgames-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/boardgames-e2e/cypress.json",
+            "tsConfig": "apps/boardgames-e2e/tsconfig.e2e.json",
+            "devServerTarget": "boardgames:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "boardgames:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/boardgames-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
