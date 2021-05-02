@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { BggClientService } from '../services/bgg-client.service';
 
 @NgModule({
   declarations: [AppComponent, RandomGamesListComponent],
@@ -32,7 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatRadioModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [BggClientService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

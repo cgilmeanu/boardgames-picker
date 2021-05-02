@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, of, timer } from 'rxjs';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { Boardgame } from '../models';
+import { BggClientService } from '../services/bgg-client.service';
 
 export interface BoardgameGeekConfig {
   username: string;
@@ -32,7 +33,7 @@ export class AppComponent {
 
   pickedGames: Boardgame[];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private bggClient: BggClientService) {}
 
   loadGames() {
     const options: BoardgameGeekConfig = {
@@ -48,45 +49,8 @@ export class AppComponent {
       ''
     );
 
-    this.games$ = this.loadBoardgames(
+    this.games$ = this.bggClient.loadBoardgames(
       `https://boardgamegeek.com/xmlapi2/collection?${queryString.substring(1)}`
     );
-  }
-
-  private loadBoardgames(url: string): Observable<Boardgame[]> {
-    return this.httpClient
-      .request('GET', url, {
-        responseType: 'text',
-      })
-      .pipe(
-        switchMap(
-          (response): Observable<Boardgame[]> => {
-            const xmlParser = new DOMParser();
-
-            const xmlDoc = xmlParser.parseFromString(response, 'text/xml');
-            const items = xmlDoc.getElementsByTagName('item');
-
-            let games: Array<Boardgame> = [];
-
-            for (let index = 0; index < items.length; index++) {
-              const name = items[index].getElementsByTagName('name')[0]
-                ?.innerHTML;
-              const year = items[index].getElementsByTagName('yearpublished')[0]
-                ?.innerHTML;
-              const thumbnail = items[index].getElementsByTagName(
-                'thumbnail'
-              )[0]?.innerHTML;
-
-              games = [
-                ...games,
-                { name, yearPublished: Number.parseInt(year), thumbnail },
-              ];
-            }
-
-            return of(games);
-          }
-        ),
-        take(1)
-      );
   }
 }
