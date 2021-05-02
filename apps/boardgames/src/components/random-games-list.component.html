@@ -1,5 +1,11 @@
-<div class="pg-random-games" *ngIf="pickedGames">
-  <h2>Picked boardgame(s)</h2>
+<div
+  class="pg-random-games"
+  *ngIf="pickedGames"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+>
+  <div class="pg-random-games__header"><h2>Picked boardgame(s)</h2></div>
+
   <div
     class="pg-random-games__content"
     fxLayout="row wrap"
