@@ -12,8 +12,11 @@
     <div>
       <span>b</span><span>o</span><span>a</span><span>r</span><span>d</span
       ><span>g</span><span>a</span><span>m</span><span>e</span><span>s</span
-      ><span>&nbsp;</span><span>p</span><span>i</span><span>c</span
-      ><span>k</span><span>e</span><span>r</span>
+      ><span>&nbsp;</span>
+    </div>
+    <div>
+      <span>p</span><span>i</span><span>c</span><span>k</span><span>e</span
+      ><span>r</span>
       <span>!</span>
     </div>
   </h1>
@@ -45,14 +48,18 @@
     </div>
     <div
       class="pg-user-preferences__field"
-      fxLyaout="row"
-      fxAlignLayout="center"
+      fxLayout="column"
+      fxLayoutAlign="space-around center"
     >
+      <mat-label class="pg-user-preferences__field-label"
+        >How many games to pick?</mat-label
+      >
       <mat-radio-group
         class="pg-user-preferences__pick-group"
         aria-label="How many games to pick"
-        fxLayout="row"
-        fxAlignLayout="center"
+        fxLayout.gt-md="row"
+        fxLayout.lt-md="column"
+        fxLayoutAlign.lt-md="center center"
         fxLayoudGap="5px"
         [(ngModel)]="pickCount"
       >

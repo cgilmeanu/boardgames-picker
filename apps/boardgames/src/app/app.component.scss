@@ -34,20 +34,25 @@
   width: 100vw;
 
   &__field {
-    height: 50px;
+    margin-top: 5px;
   }
 
   &__username {
     width: 200px;
   }
 
+  &__field-label {
+    width: fit-content;
+  }
+
   &__pick-group {
-    width: 450px;
-    margin-top: 20px;
+    width: fit-content;
   }
 
   &__pick-option {
     margin-right: 15px;
+    margin-top: 5px;
+    width: 80px;
   }
 }
 
